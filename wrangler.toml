@@ -1,5 +1,9 @@
 name = "astro-test-site"
 compatibility_date = "2026-04-28"
 
+routes = [
+  { pattern = "ghost.eberhardphoto.com", custom_domain = true }
+]
+
 [assets]
 directory = "./dist"

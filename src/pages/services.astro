@@ -6,6 +6,45 @@ const services = [
 	{ name: "Landing Pages", desc: "Fast, focused pages that turn clicks into conversations." },
 	{ name: "Tracking & Attribution", desc: "Know which dollar produced which lead — for real, not guessed." },
 ];
+
+const phases = [
+	{
+		num: 1,
+		name: "Foundation",
+		timeframe: "Weeks 1–4",
+		desc: "Audit your current funnel, install clean tracking, and pinpoint the highest-leverage offer to lead with.",
+		bullets: [
+			"Full marketing & sales audit",
+			"Conversion tracking + attribution setup",
+			"Baseline CAC, LTV, and conversion rates",
+			"Pick the wedge offer to scale first",
+		],
+	},
+	{
+		num: 2,
+		name: "Activation",
+		timeframe: "Months 2–4",
+		desc: "Launch campaigns small, iterate fast on what the data says, and expand to additional channels once one is profitable.",
+		bullets: [
+			"Tested ad campaigns live at controlled spend",
+			"Conversion-focused landing pages",
+			"Weekly reporting cadence + creative iteration",
+			"Add a second channel once channel one is profitable",
+		],
+	},
+	{
+		num: 3,
+		name: "Compound",
+		timeframe: "Month 4+",
+		desc: "Scale what works, build retention and LTV mechanisms, and automate the parts that don't need a human eye.",
+		bullets: [
+			"Scale ad spend on proven winners",
+			"Email + retention programs to grow LTV",
+			"Automated dashboards & alerting",
+			"Expand to additional markets, services, or geographies",
+		],
+	},
+];
 ---
 
 <BaseLayout title="Services — Ghost Zero Marketing">
@@ -17,6 +56,23 @@ const services = [
 			<h2>{name}</h2>
 			<p>{desc}</p>
 		</section>
+	))}
+
+	<h2>Ghost Zero Growth Agency Operations Plan</h2>
+	<p>Every engagement runs through a three-phase plan so you always know what we're working on and why.</p>
+
+	{phases.map(({ num, name, timeframe, desc, bullets }) => (
+		<div class="phase">
+			<div class="phase-num">{num}</div>
+			<div>
+				<h3>Phase {num} — {name}</h3>
+				<p class="meta">{timeframe}</p>
+				<p>{desc}</p>
+				<ul>
+					{bullets.map((b) => <li>{b}</li>)}
+				</ul>
+			</div>
+		</div>
 	))}
 
 	<a class="cta" href="/about">About us →</a>

@@ -14,6 +14,8 @@ const isActive = (href: string) => pathname === href || (href !== "/" && pathnam
 		<title>{title}</title>
 		<style>
 			:root {
+				--accent: #facc15;
+				--accent-strong: #eab308;
 				font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
 				color-scheme: light dark;
 			}
@@ -35,22 +37,54 @@ const isActive = (href: string) => pathname === href || (href !== "/" && pathnam
 			nav a {
 				color: #555;
 				text-decoration: none;
+				padding-bottom: 0.25rem;
+				border-bottom: 2px solid transparent;
 			}
 			nav a:hover { color: #000; }
-			nav a.active { color: #000; border-bottom: 2px solid #000; }
+			nav a.active { color: #000; border-bottom-color: var(--accent); }
 			h1 { font-size: 2.25rem; margin: 0 0 0.5rem; }
+			h1 .accent { background: var(--accent); padding: 0 0.3rem; }
 			h2 { font-size: 1.4rem; margin-top: 2rem; }
 			p { color: #444; }
 			ul { padding-left: 1.25rem; }
 			a.cta {
 				display: inline-block;
 				margin-top: 1rem;
-				padding: 0.6rem 1.25rem;
-				background: #000;
-				color: #fff;
+				padding: 0.7rem 1.4rem;
+				background: var(--accent);
+				color: #000;
+				font-weight: 600;
 				border-radius: 6px;
 				text-decoration: none;
+				border: 2px solid var(--accent);
+				transition: background 0.15s, border-color 0.15s;
 			}
+			a.cta:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+			.phase {
+				display: flex;
+				gap: 1.25rem;
+				align-items: flex-start;
+				padding: 1.25rem;
+				margin-top: 1rem;
+				border: 1px solid #e5e5e5;
+				border-radius: 8px;
+			}
+			.phase-num {
+				flex: 0 0 auto;
+				width: 3rem;
+				height: 3rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: var(--accent);
+				color: #000;
+				font-weight: 700;
+				font-size: 1.25rem;
+				border-radius: 6px;
+			}
+			.phase h3 { margin: 0 0 0.25rem; font-size: 1.1rem; }
+			.phase p { margin: 0.25rem 0; }
+			.phase .meta { color: #888; font-size: 0.85rem; }
 			footer {
 				margin-top: 4rem;
 				padding-top: 1.5rem;
@@ -63,10 +97,10 @@ const isActive = (href: string) => pathname === href || (href !== "/" && pathnam
 				nav { border-color: #2a2a2a; }
 				nav a { color: #aaa; }
 				nav a:hover, nav a.active { color: #fff; }
-				nav a.active { border-color: #fff; }
 				p { color: #bbb; }
+				.phase { border-color: #2a2a2a; }
+				.phase .meta { color: #888; }
 				footer { color: #777; border-color: #2a2a2a; }
-				a.cta { background: #fff; color: #000; }
 			}
 		</style>
 	</head>
