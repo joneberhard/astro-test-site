@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const services = [
+	{ name: "Google Ads", desc: "Intent-based search campaigns that catch buyers in the moment they're looking." },
+	{ name: "Landing Pages", desc: "Fast, focused pages that turn clicks into conversations." },
+	{ name: "Tracking & Attribution", desc: "Know which dollar produced which lead — for real, not guessed." },
+];
+---
+
+<BaseLayout title="Services — Ghost Zero Marketing">
+	<h1>Services</h1>
+	<p>Three things, done well.</p>
+
+	{services.map(({ name, desc }) => (
+		<section>
+			<h2>{name}</h2>
+			<p>{desc}</p>
+		</section>
+	))}
+
+	<a class="cta" href="/about">About us →</a>
+</BaseLayout>
