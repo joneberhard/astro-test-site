@@ -17,8 +17,14 @@
 5. **[COSTS.md](./COSTS.md)** — every service's free tier, paid tier, and
    when to upgrade what.
 6. **[PROVIDERS.md](./PROVIDERS.md)** — email (Postmark) + media (R2 +
-   Cloudflare Images) strategy, including how to migrate the existing client
-   websites off GitHub-hosted images.
+   Cloudflare Images) strategy.
+
+## Task-specific playbooks
+
+- **[CLOUDFLARE_IMAGES_MIGRATION.md](./CLOUDFLARE_IMAGES_MIGRATION.md)** —
+  **self-contained** playbook for migrating a client website (Eberhard Photo,
+  Neighborhood Hauling, etc.) off GitHub-hosted images and onto Cloudflare
+  Images. Hand this to any session opened against any Eberhard Astro repo.
 
 ## TL;DR
 

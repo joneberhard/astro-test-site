@@ -65,13 +65,20 @@ Each app should send from a sender domain matching its product:
 `noreply@sop.<parent>.com`, `noreply@fleet.<parent>.com`, etc.
 (One-time DNS work per subdomain.)
 
-### Resend is removed from the plan
+### Resend stays documented as a future option (not active)
 
 The founder is already paying Postmark $20/mo for the 10k plan and won't hit
-that volume soon. Standardizing on Postmark for everything (apps + clients +
-businesses) gives one bill, one DNS setup, one place to look at deliverability.
-Resend is documented here only as a future fallback if Postmark pricing ever
-becomes the constraint — not as something to evaluate now.
+that volume soon, so we use **Postmark only for now.** Resend remains a
+documented option for the future, specifically when:
+- Postmark pricing becomes the constraint at higher tiers (Postmark $45/mo
+  vs Resend $20/mo for 50k emails — Resend is meaningfully cheaper at scale).
+- A specific app needs a closely-integrated Workers email path that
+  Postmark doesn't fit.
+- Brand-specific sender domains multiply (Resend's per-domain pricing is
+  more flexible than Postmark's server-based model).
+
+**Decision now:** Postmark only. **Decision documented for later:** Resend
+is a real option when Postmark stops being the right answer.
 
 ---
 
@@ -91,15 +98,21 @@ exactly as you put them in.
 
 ### When to use Cloudflare Images (display optimization)
 
-- Any image displayed on a public website where you want responsive sizes,
-  WebP/AVIF conversion, lazy loading, and CDN delivery.
-- Specifically: **all photography on Eberhard Photo client websites.**
+- Any image displayed in a UI (website OR app) where you want responsive
+  sizes, WebP/AVIF conversion, lazy loading, and CDN delivery.
+- **Inside the four apps:**
+  - **Meal recipe photos** (cards, hero, grid views) → CF Images
+  - **Fleet vehicle photos** (dashboard thumbs, detail views) → CF Images
+  - **Asset Tracker item photos** (grid + detail views) → CF Images
+  - SOP step illustrations (if any are added later) → CF Images
+- **On client websites:** all photography on Eberhard Photo, Neighborhood
+  Hauling, etc. → CF Images. (See [`CLOUDFLARE_IMAGES_MIGRATION.md`](./CLOUDFLARE_IMAGES_MIGRATION.md)
+  for the migration playbook.)
 - Marketing pages for the four apps.
-- Public profile / cover images in the apps (if added).
 
 Cloudflare Images takes one upload and gives you many variants
 (`?width=400`, `?width=1200`, etc.) automatically. It's purpose-built for
-"show photos on the web."
+"show photos on the web." **Recipe, vehicle, and item photos all qualify.**
 
 ### Decision matrix
 
@@ -151,16 +164,19 @@ website with proper streaming" — never for personal video archive.
 
 ### How files connect to the database
 
-The `files` table (see `DATABASE_SCHEMA.md` §2.6) stores R2 metadata. For
-Cloudflare Images you can either:
+**Decision (committed):** the `files` table (see `DATABASE_SCHEMA.md` §2.6)
+is **R2 only** — raw uploads, PDFs, receipts, manuals, SOP proof-of-work
+originals.
 
-- **Skip the DB row** and just store the Cloudflare Images ID directly on
-  the owning record (e.g. `meal_recipes.primary_image_cf_id`), or
-- **Use the same `files` table** with `bucket_key` containing the Cloudflare
-  Images ID and `metadata_json` describing variants.
+**Cloudflare Images IDs are stored directly on the owning record** as a
+`*_image_cf_id` column:
+- `meal_recipes.primary_image_cf_id`
+- `fleet_vehicles.primary_image_cf_id`
+- `asset_items.primary_image_cf_id`
 
-Recommend the first (simpler) for app images, the second if you want unified
-asset management later.
+This keeps the two storage systems cleanly separated and avoids polymorphic
+ambiguity in the `files` table. If we ever need unified asset management
+across both, we can add an `image_cf_id` column to `files` and union later.
 
 ---
 

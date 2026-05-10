@@ -89,9 +89,12 @@ You stay under $50/mo for a long time. The big cost step is when you graduate fr
   and broadcast streams. Already wired up to founder's businesses with SPF,
   DKIM, and verified sender reputation.
 
-### Resend — not in use
-- Documented in `PROVIDERS.md` as a future fallback, but **not used**.
-  Standardizing on Postmark is the call.
+### Resend — documented for later, not used now
+- **Free:** 3,000 emails/month, 100/day cap, 1 verified domain.
+- **Pro $20/mo:** 50,000 emails/month, no daily cap.
+- **Why it stays documented:** at the 50k/mo tier Resend is **less than half
+  the price** of Postmark ($20 vs $45). Worth revisiting when email volume
+  grows, but no migration today. See `PROVIDERS.md` §1.
 
 ---
 

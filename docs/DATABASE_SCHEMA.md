@@ -21,6 +21,14 @@
 - **Migrations:** append-only, numbered files in
   `services/api/migrations/NNNN_description.sql`. Never edit a committed
   migration; write a new one.
+- **Display photos vs raw files:**
+  - **Display photos** (recipe hero, vehicle dashboard thumb, asset item
+    grid) are stored in **Cloudflare Images** and referenced via
+    `*_image_cf_id TEXT` columns on the owning record.
+  - **Raw uploads** (PDFs, receipts, manuals, SOP proof-of-work originals)
+    are stored in **R2** with metadata in the `files` table.
+  - The `files` table is R2-only. CF Images IDs are NOT stored there.
+  - See `PROVIDERS.md` §2 for the rationale.
 
 ---
 
@@ -360,7 +368,7 @@ CREATE TABLE fleet_vehicles (
   vehicle_type  TEXT CHECK (vehicle_type IN ('car','suv','pickup','van','box_truck','semi','motorcycle','trailer','other')),
   fuel_type     TEXT CHECK (fuel_type IN ('gasoline','diesel','hybrid','ev','other')),
   current_odometer INTEGER,            -- miles (or km — store unit on org)
-  primary_photo_file_id TEXT REFERENCES files(id),
+  primary_image_cf_id TEXT,            -- Cloudflare Images ID for dashboard photo
   notes         TEXT,
   created_at    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
   updated_at    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
@@ -507,7 +515,7 @@ CREATE TABLE asset_items (
   purchased_from      TEXT,
   current_value_cents INTEGER,
   warranty_end_date   TEXT,
-  primary_photo_file_id TEXT REFERENCES files(id),
+  primary_image_cf_id TEXT,            -- Cloudflare Images ID for grid/detail photo
   description         TEXT,
   tags_json           TEXT,                    -- JSON array of free-form tags
   created_at          TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
@@ -572,7 +580,7 @@ CREATE TABLE meal_recipes (
   prep_minutes    INTEGER,
   cook_minutes    INTEGER,
   source_url      TEXT,
-  primary_photo_file_id TEXT REFERENCES files(id),
+  primary_image_cf_id TEXT,            -- Cloudflare Images ID for recipe card/detail
   protein_g       INTEGER,
   carbs_g         INTEGER,
   fat_g           INTEGER,
