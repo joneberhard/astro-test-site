@@ -12,6 +12,13 @@
    shared services, deployment, secrets.
 3. **[DATABASE_SCHEMA.md](./DATABASE_SCHEMA.md)** — full Cloudflare D1 schema
    for all four apps, naming conventions, migration approach, seed data.
+4. **[PRICING.md](./PRICING.md)** — launch pricing per app + rationale and the
+   planned SOP price-raise.
+5. **[COSTS.md](./COSTS.md)** — every service's free tier, paid tier, and
+   when to upgrade what.
+6. **[PROVIDERS.md](./PROVIDERS.md)** — email (Postmark) + media (R2 +
+   Cloudflare Images) strategy, including how to migrate the existing client
+   websites off GitHub-hosted images.
 
 ## TL;DR
 
@@ -19,7 +26,7 @@
 - **Feature branch:** `claude/app-store-infrastructure-iaO1H`
 - **Main branch:** preserved (Eberhard Photo growth-ops site, unrelated)
 - **Stack:** Astro + React + Tailwind / Cloudflare Workers + Hono / D1 / R2 /
-  Better Auth / Stripe / Resend
+  Cloudflare Images / Better Auth / Stripe / Postmark
 - **Priority order:** SOP → Fleet → Asset → Meal
 - **Strategy:** Web apps now, native later. Dogfood with own businesses first.
 

@@ -33,7 +33,8 @@ web traction justifies the Apple/Google fees and store overhead.
   enterprise HR software, they just want the moving truck packed correctly.
 - **Phase 2 feature:** "Proof of Work" — mandatory live photo uploads on
   designated steps, timestamped and tied to the executing user.
-- **Pricing:** **$49/mo per business**. 200 customers = **$9,800 MRR**.
+- **Launch pricing:** **$9/mo** per business (raise to $19/mo after testimonials).
+  See [`PRICING.md`](./PRICING.md) for rationale.
 - **Distribution:** Trojan-Horse for Growth Ops sales calls. "We don't just
   build websites; we build the operational system your crews actually execute."
 - **Dogfood:** Chealsy, Miguel, moving crews.
@@ -44,8 +45,9 @@ web traction justifies the Apple/Google fees and store overhead.
 - **Concept:** Maintenance + parts tracker designed for **2–4 vehicles**
   (sedan + heavy-duty diesel + box truck — the mixed real-world fleet that
   enterprise tools ignore).
-- **Pricing:** B2B subscription **+ affiliate revenue** on parts recommendations
-  triggered by service alerts.
+- **Launch pricing:** **$4.99/mo** household tier; small-business tier
+  ($14.99/mo, more vehicles) added once demand confirmed. **+ affiliate revenue**
+  on parts recommendations triggered by service alerts.
 - **Dogfood:** founder's household + moving business fleet.
 - **Why second:** complements SOP (Growth Ops customers already have trucks),
   affiliate revenue stacks on top of subscription.
@@ -56,9 +58,9 @@ web traction justifies the Apple/Google fees and store overhead.
 - **Market:** Personal asset / home inventory market projected $1.4B+ by 2026.
 - **Use cases:** homeowner insurance documentation, tradesperson tool tracking,
   multi-business owner equipment inventory (cameras, warehouse gear).
-- **Pricing — freemium:**
+- **Launch pricing — freemium:**
   - **Free:** 25 items.
-  - **Premium $4.99/mo or $49/yr:** unlimited items, multi-user vault sharing,
+  - **Premium $2.99/mo or $24/yr:** unlimited items, multi-user vault sharing,
     PDF export for insurance claims.
 - **Distribution:** real estate, organization, and trades influencers.
 - **Why third:** lower per-customer revenue but very high virality potential
@@ -69,25 +71,36 @@ web traction justifies the Apple/Google fees and store overhead.
 - **Concept:** Recipe saver + shopping list generator **niched aggressively**
   to specialized diets (high-protein animal-based protocols, intermittent
   fasting / Warrior Diet routines).
-- **Pricing:** Consumer **$5–10/mo**, requires 1,000+ users for meaningful MRR.
+- **Launch pricing:** **$3.99/mo or $29/yr**. Niche the marketing aggressively
+  to specific diet subcultures.
 - **Distribution:** organic via influencer network in the target subcultures.
 - **Why fourth:** market is saturated overall; only winnable via tight niche.
   Lowest revenue-per-customer; build last when the shared foundation is mature.
 
 ---
 
-## 3. The $10K MRR path
+## 3. The $10K MRR path (with launch pricing)
+
+At launch pricing (SOP $9, Fleet $4.99, Asset $2.99, Meal $3.99), $10K MRR
+requires roughly **2,000 paying customers across the ecosystem** rather
+than 200 SOP customers alone.
 
 | Step | App | Customers | ARPU | MRR | Cumulative |
 |---|---|---|---|---|---|
-| A | SOP | 50 | $49 | $2,450 | $2,450 |
-| B | SOP | 200 | $49 | $9,800 | $9,800 |
-| C | + Fleet | 50 B2B | $29 + affiliate | ~$2,000 | ~$11,800 |
-| D | + Asset Tracker | 500 paid | $4.99 | $2,495 | ~$14,300 |
-| E | + Meal | 300 paid | $7 | $2,100 | ~$16,400 |
+| A | SOP | 50 | $9 | $450 | $450 |
+| B | SOP | 200 | $9 | $1,800 | $1,800 |
+| C | + Fleet | 200 | $4.99 | $998 + affiliate ~$300 | ~$3,100 |
+| D | + Asset | 500 | $2.99 | $1,495 | ~$4,600 |
+| E | + Meal | 300 | $3.99 | $1,197 | ~$5,800 |
+| F | SOP raise to $19 (new only) | 250@$9 + 100@$19 | mixed | $4,150 | ~$9,500 |
+| G | grow Fleet + Asset | 600 + 800 | mixed | $5,386 | ~$14,000 |
 
-**SOP alone is sufficient to hit the $10K MRR goal.** Everything else is upside
-and customer-lifetime-value extension across the four-product ecosystem.
+**Lower per-customer pricing trades concentration risk for slower
+compounding.** It's the right trade-off if customer count is your bottleneck;
+the wrong trade-off if customer count is easy and revenue is hard.
+
+See [`PRICING.md`](./PRICING.md) for full pricing rationale and the planned
+SOP price-raise after testimonials.
 
 ---
 

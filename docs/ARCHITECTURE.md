@@ -57,8 +57,9 @@ until the founder is ready to switch what the repo's `main` represents.
 | Database | **Cloudflare D1** (SQLite) | Free tier 5GB / 5M reads, ships with Workers |
 | Auth | **Better Auth** (self-hosted on Workers) | Free, schema you control, email + OAuth |
 | Billing | **Stripe** | Subscriptions, customer portal, webhooks |
-| File storage | **Cloudflare R2** | Photos (assets, fleet, SOP proof-of-work), receipts, manuals |
-| Email | **Resend** | Free tier (3k/mo, 100/day) for verification + reminders |
+| File storage | **Cloudflare R2** | Raw uploads (receipts, manuals, proof-of-work originals); free 10 GB + free egress |
+| Display images | **Cloudflare Images** ($5/mo) | Photos shown on websites with auto-resize / responsive variants |
+| Email | **Postmark** | Already in use across founder's businesses; consolidate here |
 | Deployment | **Cloudflare Pages** (frontends) + **Workers** (API) | Free, integrated, zero-config CI from GitHub |
 | Monorepo tooling | **pnpm workspaces + Turborepo** | Standard, AI-friendly |
 | TypeScript | **strict mode everywhere** | Shared types via `packages/shared` |
@@ -159,7 +160,9 @@ Stored in Cloudflare (Workers + Pages) — **never** committed to the repo.
 | `GOOGLE_OAUTH_CLIENT_ID` / `SECRET` | Worker | Google Cloud Console |
 | `STRIPE_SECRET_KEY` | Worker | Stripe dashboard |
 | `STRIPE_WEBHOOK_SECRET` | Worker | Stripe webhook config |
-| `RESEND_API_KEY` | Worker | Resend dashboard |
+| `POSTMARK_SERVER_TOKEN` | Worker | Postmark server-level token (one per Server) |
+| `CF_IMAGES_ACCOUNT_HASH` | Frontends | Cloudflare Images delivery URL hash (public) |
+| `CF_IMAGES_API_TOKEN` | Worker | for programmatic uploads if needed |
 | `R2_BUCKET` (binding) | Worker | wrangler.toml |
 | `DB` (D1 binding) | Worker | wrangler.toml |
 | `AMAZON_ASSOCIATES_TAG` | Worker (affiliate) | Amazon dashboard |
