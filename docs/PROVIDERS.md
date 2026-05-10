@@ -192,14 +192,22 @@ above 100 MB. This is technical debt that compounds.
 
 ### Migration playbook (per client website)
 
+**See [`CLOUDFLARE_IMAGES_MIGRATION.md`](./CLOUDFLARE_IMAGES_MIGRATION.md) for
+the full self-contained playbook including the per-site delivery domain
+convention and ID prefix table.** Short version:
+
 1. **Inventory** — list all images currently in `public/` or `src/assets/`:
    ```bash
    find public src -type f \( -name '*.jpg' -o -name '*.jpeg' -o -name '*.png' -o -name '*.webp' -o -name '*.gif' \) > images.txt
    ```
 2. **Bulk upload** to Cloudflare Images via the Cloudflare dashboard (drag
-   and drop) or the `wrangler` CLI. Note each image's Cloudflare Images ID.
-3. **Set up custom domain** (optional but recommended): point
-   `images.eberhardphoto.com` (CNAME) to the Cloudflare Images delivery URL.
+   and drop) or a small upload script. Note each image's Cloudflare Images ID
+   (prefix it by site: `ssp_`, `nbh_`, etc. — see migration doc §3.1).
+3. **Set up per-site delivery domain** — every client gets its own
+   `images.<clientdomain>` CNAME to `imagedelivery.net`, **proxied (orange
+   cloud)**. Do not share a single delivery domain across clients
+   (decision: 2026-05-10 — Eberhard Photo is a separate business, not the
+   media CDN for client work).
 4. **Update Astro components** to reference the new URLs:
    ```astro
    ---
@@ -209,25 +217,28 @@ above 100 MB. This is technical debt that compounds.
    <Image src={hero} alt="..." />
 
    ---
-   // After (Cloudflare Images via custom domain):
-   const heroId = 'abc123-def456-...';
-   const heroUrl = `https://images.eberhardphoto.com/${heroId}/public`;
+   // After (Cloudflare Images via per-site delivery domain):
+   const heroId = 'ssp_hero_abc123';
+   const base = `https://images.safeandsoundpianos.com/${heroId}`;
    ---
-   <img src={heroUrl} alt="..." srcset={`${heroUrl}/w=400 400w, ${heroUrl}/w=1200 1200w`} />
+   <img src={`${base}/card`} alt="..." srcset={`${base}/thumbnail 400w, ${base}/card 800w, ${base}/hero 1600w`} />
    ```
-5. **Delete images from git** in a single commit. Run `git gc --aggressive`
-   to reclaim local space (won't shrink GitHub history without a force-push
-   filter — usually not worth the disruption).
+5. **Delete images from git** in a follow-up commit (after preview is
+   approved). Run `git gc --aggressive` to reclaim local space (won't
+   shrink GitHub history without a force-push filter — usually not worth
+   the disruption).
 6. **Verify** the deployed site still renders all images.
 
 ### Astro `astro.config.mjs` snippet for Cloudflare Images remote pattern
 
 ```javascript
+// One entry per site's delivery domain — you don't list other clients'
+// domains in this site's config.
 export default defineConfig({
   image: {
-    domains: ['images.eberhardphoto.com'],
     remotePatterns: [
-      { protocol: 'https', hostname: '**.imagedelivery.net' },
+      { protocol: 'https', hostname: 'images.safeandsoundpianos.com' },
+      { protocol: 'https', hostname: 'imagedelivery.net' },   // fallback
     ],
   },
 });

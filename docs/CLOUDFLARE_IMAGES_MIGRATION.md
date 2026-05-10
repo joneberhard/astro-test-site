@@ -86,12 +86,14 @@ The variant name controls sizing — `public` is the original, `thumbnail`,
 Before this session can do anything in code, the founder must:
 
 - [ ] Have a Cloudflare account.
-- [ ] Subscribe to **Cloudflare Images** ($5/mo).
-- [ ] Note the **Account Hash** (Cloudflare dashboard → Images → Overview).
+- [ ] Subscribe to **Cloudflare Images** ($5/mo, 100,000 stored tier).
+- [ ] Note the **Account Hash** (Cloudflare dashboard → Media → Images →
+      Hosted images, top of page — only visible after subscription is active).
 - [ ] Generate an **API token** with `Cloudflare Images: Edit` permission for
-      bulk uploads (Cloudflare dashboard → My Profile → API Tokens).
-- [ ] (Optional but recommended) Set up a **custom domain** for image delivery,
-      e.g. `images.eberhardphoto.com`. CNAME to `imagedelivery.net`.
+      bulk uploads (Cloudflare dashboard → My Profile → API Tokens). Scope:
+      **Account-level**, not zone-level — Images is an account product.
+- [ ] Set up a **per-site delivery domain** (CNAME to `imagedelivery.net`,
+      **proxied / orange cloud**). See §3.1 for the naming convention.
 - [ ] Define **standard variants** in the Cloudflare Images dashboard:
   - `thumbnail` — 400px wide, fit=scale-down
   - `card` — 800px wide, fit=scale-down
@@ -99,6 +101,41 @@ Before this session can do anything in code, the founder must:
   - `public` — original (default)
 
 If any of these are missing, **stop and ask the founder** before proceeding.
+
+### 3.1 — Delivery domain convention (decision: per-site, not shared)
+
+**Decision (2026-05-10):** every client site gets its **own** `images.*`
+subdomain. Do **not** route client images through `images.eberhardphoto.com`
+— Eberhard Photo is a separate photography business, not the media CDN for
+client work. Mixing them would muddle the brand and the analytics.
+
+| Site | Delivery domain |
+|---|---|
+| Safe and Sound Pianos | `images.safeandsoundpianos.com` |
+| Neighborhood Hauling | `images.neighborhoodhauling.com` |
+| Utah Rugby League | `images.utahrugbyleague.com` |
+| BeaUTAHful Events | `images.beautahfulevents.com` |
+| Prosperity Society | `images.prosperitysociety.com` |
+| Fresh Ones Barber | `images.freshonesbarber.com` |
+| Eberhard Photo | `images.eberhardphoto.com` (own photos only) |
+
+**Image ID prefix convention.** All sites share one Cloudflare account's ID
+namespace, so prefix every uploaded image ID to prevent collisions and make
+ownership obvious in logs:
+
+- `ssp_` — Safe and Sound Pianos
+- `nbh_` — Neighborhood Hauling
+- `url_` — Utah Rugby League
+- `bea_` — BeaUTAHful Events
+- `pro_` — Prosperity Society
+- `fob_` — Fresh Ones Barber
+- `ebp_` — Eberhard Photo
+
+Example: `ssp_a05a5410`, `nbh_job1-before`.
+
+**DNS reminder.** These `images.*` CNAMEs are **proxied (orange cloud)** —
+opposite of HighLevel-style CNAMEs which must be DNS-only. Cloudflare Images
+expects to terminate the proxied request and serve from edge.
 
 ---
 
@@ -369,29 +406,66 @@ inline URLs are fine.
 This section grows as we migrate more sites. Add findings here for the next
 session.
 
-### `joneberhard/astro-test-site` (Eberhard Photo growth-ops)
+### Inventory (run 2026-05-10)
 
-- Astro 6.1.10, single Astro app on `main`.
+Run from `C:\dev\`:
+
+| Repo | Files | On-disk size | Priority |
+|---|---|---|---|
+| `safe-and-sound-pianos` | 226 | **632 MB** | **Urgent** — raw camera JPEGs, 10-15 MB each |
+| `neighborhood-hauling` | 25 | 126 MB | **Urgent** — raw jobs photos, 7 MB each |
+| `beautahful-events` | 93 | 37 MB | Worth doing |
+| `utah-rugby-league` | 127 | 13 MB | Worth doing (volume of player photos) |
+| `prosperity-society` | 22 | 9 MB | Optional |
+| `fresh-ones-barber` | 3 | 2 MB | Skip for now |
+| `sspianos-team` | 3 | 0.2 MB | Skip |
+| `salt-lake-pianotek` | 2 | 0 MB | Skip |
+| `astro-test-site` | 1 | 0 MB | Favicon only |
+| `buffalo-kitchen` | 0 | 0 MB | N/A |
+
+**Total ~819 MB across 502 files.** All comfortably inside the 100k-stored
+quota — one $5/mo subscription covers the entire portfolio for years.
+
+Important: every big image is `import`ed via Astro's `<Image>` component
+(verified in `EditorialGrid.astro`, `BeforeAfter.astro`), so Astro is
+optimizing them at build time. **Delivery to visitors is already fine.**
+This migration is about **repo bloat**, not runtime performance.
+
+### `joneberhard/safe-and-sound-pianos` — Phase 1, urgent
+
+- 226 images in `src/assets/photos/`, raw camera JPEGs.
+- Uses `EditorialGrid.astro` with `<Image>` imports.
+- Delivery domain: `images.safeandsoundpianos.com`.
+- ID prefix: `ssp_`.
+
+### `joneberhard/neighborhood-hauling` — Phase 1, urgent
+
+- 25 images in `src/assets/jobs/`, raw before/after photos.
+- Uses `BeforeAfter.astro` with `<Image>` imports.
+- Delivery domain: `images.neighborhoodhauling.com`.
+- ID prefix: `nbh_`.
+
+### Phase 2 candidates
+
+`beautahful-events`, `utah-rugby-league`, `prosperity-society` — worth
+migrating in the next month or two. Same playbook, see prefix table in §3.1.
+
+### `joneberhard/astro-test-site` (Eberhard Photo growth-ops, `main` branch)
+
+- Astro 6.1.10, single Astro app.
 - Pages: `index`, `about`, `services`.
 - Layout: `BaseLayout.astro` with global yellow theme.
-- Images: TBD — run §4.1 inventory.
-- Custom domain target: `images.eberhardphoto.com`.
+- 1 image (favicon). **No migration needed** — keep favicon in `public/`.
 
-### `joneberhard/neighborhood-hauling`
+### Eberhard Photo main portfolio site (separate repo, TBD)
 
-- Astro app, has assets folder, mobile menu and Services dropdown in header.
-- Images: TBD — run §4.1 inventory.
-- Custom domain target: `images.neighborhoodhauling.com` or share
-  `images.eberhardphoto.com` with prefixed IDs (`nbh_<filename>`).
-
-### Eberhard Photo main portfolio site (separate repo)
-
-- Repo URL: TBD (not yet in scope of `joneberhard/astro-test-site` or
-  `joneberhard/neighborhood-hauling`). The founder must add Claude Code
-  access before migration can begin.
+- Repo URL: TBD. The founder must add Claude Code access before migration
+  can begin.
 - This is the largest expected migration (a photographer's portfolio).
   Likely hundreds of images. Budget extra time for §4.1 inventory and
   §4.2 upload.
+- Delivery domain: `images.eberhardphoto.com` (its own domain — see §3.1).
+- ID prefix: `ebp_`.
 
 ---
 
