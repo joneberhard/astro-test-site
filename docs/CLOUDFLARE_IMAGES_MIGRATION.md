@@ -109,15 +109,15 @@ subdomain. Do **not** route client images through `images.eberhardphoto.com`
 — Eberhard Photo is a separate photography business, not the media CDN for
 client work. Mixing them would muddle the brand and the analytics.
 
-| Site | Delivery domain |
-|---|---|
-| Safe and Sound Pianos | `images.safeandsoundpianos.com` |
-| Neighborhood Hauling | `images.neighborhoodhauling.com` |
-| Utah Rugby League | `images.utahrugbyleague.com` |
-| BeaUTAHful Events | `images.beautahfulevents.com` |
-| Prosperity Society | `images.prosperitysociety.com` |
-| Fresh Ones Barber | `images.freshonesbarber.com` |
-| Eberhard Photo | `images.eberhardphoto.com` (own photos only) |
+| Site | Delivery domain | CNAME status |
+|---|---|---|
+| Safe and Sound Pianos | `images.safeandsoundpianos.com` | ✅ created 2026-05-10 |
+| Neighborhood Hauling | `images.neighborhoodhaulingut.com` | ✅ created 2026-05-10 |
+| Utah Rugby League | `images.utahrugbyleague.com` | ✅ created 2026-05-10 |
+| Prosperity Society | `images.theprosperitysociety.com` | ✅ created 2026-05-10 |
+| Fresh Ones Barber | `images.freshonesbarber.com` | ✅ created 2026-05-10 |
+| Eberhard Photo | `images.eberhardphoto.com` (own photos only) | ✅ created 2026-05-10 |
+| BeaUTAHful Events | TBD — needs custom domain on Pages project first | ⏸ pending |
 
 **Image ID prefix convention.** All sites share one Cloudflare account's ID
 namespace, so prefix every uploaded image ID to prevent collisions and make
@@ -442,7 +442,9 @@ This migration is about **repo bloat**, not runtime performance.
 
 - 25 images in `src/assets/jobs/`, raw before/after photos.
 - Uses `BeforeAfter.astro` with `<Image>` imports.
-- Delivery domain: `images.neighborhoodhauling.com`.
+- Delivery domain: `images.neighborhoodhaulingut.com` (the canonical zone is
+  `neighborhoodhaulingut.com` with the UT suffix — `neighborhoodhauling.com`
+  is not on the account).
 - ID prefix: `nbh_`.
 
 ### Phase 2 candidates
