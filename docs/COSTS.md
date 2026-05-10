@@ -59,6 +59,17 @@ You stay under $50/mo for a long time. The big cost step is when you graduate fr
 - **When to use:** any frontend that displays photos to website visitors with multiple sizes (thumbnails, lightbox, hero images). **All Eberhard client websites should use this.**
 - **When NOT to use:** raw asset storage where the user needs to download the original (PDF manuals, receipts) — use R2.
 
+### Cloudflare Stream (video — only if needed)
+- **$5 per 1,000 minutes stored** per month.
+- **$1 per 1,000 minutes delivered**.
+- **When to use:** any time you want to embed video on a website with
+  adaptive-bitrate streaming, automatic transcoding, thumbnails, and an
+  embed player. Examples: app demo videos, course content, client
+  testimonials.
+- **When NOT to use:** as a personal video backup — way too expensive vs
+  Google Drive / iCloud / Backblaze for that. Stream is a video CDN +
+  encoder + player; it's not bulk storage.
+
 ### Cloudflare Web Analytics
 - **Free:** server-side analytics, no cookies, no GDPR banner needed. Use it.
 
@@ -69,16 +80,18 @@ You stay under $50/mo for a long time. The big cost step is when you graduate fr
 
 ## 2. Email — Postmark (recommended for unified ecosystem)
 
-### Postmark
-- **$15/mo "10k" plan:** 10,000 emails/month transactional + broadcast.
-- **$45/mo "50k" plan:** 50,000 emails/month.
+### Postmark — current setup
+- **$20/mo "10k" plan:** 10,000 emails/month transactional + broadcast
+  (founder's current plan).
+- **$45/mo "50k" plan:** 50,000 emails/month if needed later.
 - **Overage:** $1.25 per additional 1,000 emails.
-- **Why use it:** great deliverability, clean API, separate transactional and broadcast streams (so a marketing send doesn't hurt your password-reset deliverability). **You already use it.**
+- **Why use it:** great deliverability, clean API, separate transactional
+  and broadcast streams. Already wired up to founder's businesses with SPF,
+  DKIM, and verified sender reputation.
 
-### Resend (alternative)
-- **Free:** 3,000 emails/month, 100/day cap, 1 verified domain.
-- **Pro $20/mo:** 50,000 emails/month, no daily cap.
-- **Why consider:** the free tier covers a tiny app indefinitely. Worth keeping in your back pocket if Postmark's $15/mo feels heavy for an early-stage MVP.
+### Resend — not in use
+- Documented in `PROVIDERS.md` as a future fallback, but **not used**.
+  Standardizing on Postmark is the call.
 
 ---
 
@@ -151,11 +164,35 @@ At the proposed pricing, ignoring affiliate revenue:
 
 ---
 
-## 9. Decisions captured
+## 9. R2 vs Google Drive (don't try to consolidate)
 
-- **Email:** Postmark across all apps and client sites (already set up).
-- **Photo storage for app users (uploads):** R2 (free up to 10 GB).
-- **Photo display for client websites:** Cloudflare Images ($5/mo).
+A natural question: if R2 is $15/TB/month with free egress, can I drop
+Google Drive and put everything personal there?
+
+**Mathematically yes; practically no.** R2 has no native browsing UI,
+no mobile apps, no albums, no sharing flows. To use it as personal storage
+you'd live inside Cyberduck or Rclone — not a workflow that survives a
+spouse uploading vacation photos.
+
+| Service | 2 TB/mo | UI | Mobile apps | Sharing |
+|---|---|---|---|---|
+| Google One 2TB | $9.99 | yes | yes | yes |
+| iCloud+ 2TB | $9.99 | yes | yes | yes |
+| Backblaze B2 2TB | $12 | basic | no | basic |
+| **R2 2TB** | **$30** | minimal | no | API only |
+
+**Decision:** keep Google Drive for personal storage; R2 is for app-side
+file storage only.
+
+---
+
+## 10. Decisions captured
+
+- **Email:** Postmark across all apps and client sites (already at $20/mo).
+- **App user uploads (raw bytes):** R2 (free up to 10 GB).
+- **Photos displayed on websites:** Cloudflare Images ($5/mo).
+- **Embedded video on websites:** Cloudflare Stream (only when needed).
+- **Personal photo/video storage:** Google Drive (don't consolidate to R2).
 - **Auth:** Better Auth, self-hosted on Workers (free).
 - **Billing:** Stripe.
 - **Domain strategy:** TBD — recommend single parent domain with subdomains.

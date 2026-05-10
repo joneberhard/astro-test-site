@@ -45,9 +45,13 @@ web traction justifies the Apple/Google fees and store overhead.
 - **Concept:** Maintenance + parts tracker designed for **2–4 vehicles**
   (sedan + heavy-duty diesel + box truck — the mixed real-world fleet that
   enterprise tools ignore).
-- **Launch pricing:** **$4.99/mo** household tier; small-business tier
-  ($14.99/mo, more vehicles) added once demand confirmed. **+ affiliate revenue**
-  on parts recommendations triggered by service alerts.
+- **Launch pricing — vehicle-count tiers, log unlimited forever on every tier:**
+  - Free: 1 vehicle (full features + affiliate links)
+  - Household $4.99/mo: up to 4 vehicles
+  - Small Business $14.99/mo: up to 10 + multi-user roles + parts inventory
+  - Fleet Pro $29/mo: up to 25 + reports + API
+  - **+ affiliate revenue** on parts recommendations triggered by service alerts.
+  - Affiliate links are visible to free and paid users alike. See [`PRICING.md`](./PRICING.md).
 - **Dogfood:** founder's household + moving business fleet.
 - **Why second:** complements SOP (Growth Ops customers already have trucks),
   affiliate revenue stacks on top of subscription.
@@ -71,8 +75,15 @@ web traction justifies the Apple/Google fees and store overhead.
 - **Concept:** Recipe saver + shopping list generator **niched aggressively**
   to specialized diets (high-protein animal-based protocols, intermittent
   fasting / Warrior Diet routines).
-- **Launch pricing:** **$3.99/mo or $29/yr**. Niche the marketing aggressively
-  to specific diet subcultures.
+- **Launch pricing:** **$3.99/mo or $29/yr.**
+  - Free tier has **unlimited recipes + meal planner + affiliate links** —
+    the upgrade gate is **automation** (AI plan generator, URL recipe import,
+    macro tracking, multi-user household, grocery delivery integration), not
+    recipe count.
+  - Niche the marketing aggressively to specific diet subcultures
+    (high-protein animal-based, IF/Warrior, carnivore strict).
+  - Future revenue: curated diet packs ($9–19 one-off), coach connect tier,
+    sponsored content, white-label for fitness coaches. See [`PRICING.md`](./PRICING.md).
 - **Distribution:** organic via influencer network in the target subcultures.
 - **Why fourth:** market is saturated overall; only winnable via tight niche.
   Lowest revenue-per-customer; build last when the shared foundation is mature.
@@ -81,19 +92,19 @@ web traction justifies the Apple/Google fees and store overhead.
 
 ## 3. The $10K MRR path (with launch pricing)
 
-At launch pricing (SOP $9, Fleet $4.99, Asset $2.99, Meal $3.99), $10K MRR
-requires roughly **2,000 paying customers across the ecosystem** rather
-than 200 SOP customers alone.
+At launch pricing (SOP $9, Fleet tiered, Asset $2.99, Meal $3.99) plus
+affiliate revenue, $10K MRR is reached by a mix of subscriptions across all
+four apps plus the SOP price increase after testimonials.
 
-| Step | App | Customers | ARPU | MRR | Cumulative |
-|---|---|---|---|---|---|
-| A | SOP | 50 | $9 | $450 | $450 |
-| B | SOP | 200 | $9 | $1,800 | $1,800 |
-| C | + Fleet | 200 | $4.99 | $998 + affiliate ~$300 | ~$3,100 |
-| D | + Asset | 500 | $2.99 | $1,495 | ~$4,600 |
-| E | + Meal | 300 | $3.99 | $1,197 | ~$5,800 |
-| F | SOP raise to $19 (new only) | 250@$9 + 100@$19 | mixed | $4,150 | ~$9,500 |
-| G | grow Fleet + Asset | 600 + 800 | mixed | $5,386 | ~$14,000 |
+| Step | What | MRR added | Cumulative |
+|---|---|---|---|
+| A | SOP 50 customers @ $9 | $450 | $450 |
+| B | SOP 200 customers @ $9 | $1,350 more | $1,800 |
+| C | Fleet: 100 Household $4.99 + 30 SMB $14.99 + 5 Pro $29 + affiliate ~$500 | ~$1,600 | ~$3,400 |
+| D | Asset: 500 paid @ $2.99 | $1,495 | ~$4,900 |
+| E | Meal: 300 paid @ $3.99 + affiliate ~$300 | ~$1,500 | ~$6,400 |
+| F | SOP raise to $19 (new only): 250 grandfathered @ $9 + 100 new @ $19 | $1,900 more | ~$8,300 |
+| G | Fleet ramp to 400 Household + 80 SMB + 15 Pro + affiliate ~$2,000 | ~$3,400 more | ~$11,700 |
 
 **Lower per-customer pricing trades concentration risk for slower
 compounding.** It's the right trade-off if customer count is your bottleneck;

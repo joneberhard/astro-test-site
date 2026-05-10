@@ -65,13 +65,13 @@ Each app should send from a sender domain matching its product:
 `noreply@sop.<parent>.com`, `noreply@fleet.<parent>.com`, etc.
 (One-time DNS work per subdomain.)
 
-### When to consider switching to Resend
+### Resend is removed from the plan
 
-- If Postmark's $15/mo minimum feels heavy for an MVP that sends <500 emails/month.
-- If you want webhooks-as-a-service tightly integrated with the Cloudflare ecosystem.
-- If you need to send from many short-lived domains (Resend's pricing is per-month, not per-domain).
-
-For now: stay on Postmark. **Don't run two email providers in production.**
+The founder is already paying Postmark $20/mo for the 10k plan and won't hit
+that volume soon. Standardizing on Postmark for everything (apps + clients +
+businesses) gives one bill, one DNS setup, one place to look at deliverability.
+Resend is documented here only as a future fallback if Postmark pricing ever
+becomes the constraint — not as something to evaluate now.
 
 ---
 
@@ -114,6 +114,40 @@ Cloudflare Images takes one upload and gives you many variants
 | Eberhard Photo client portfolio gallery | **Cloudflare Images** | Public website with responsive variants |
 | Neighborhood Hauling site hero images | **Cloudflare Images** | Ditto |
 | Marketing site hero images | **Cloudflare Images** | Ditto |
+
+### R2 is NOT a Google Drive replacement
+
+This came up directly. R2 storage at **$15/TB/month** with free egress is
+cheap, but it has **no native browsing UI, no albums, no sharing flows, no
+mobile app**. To use it as personal storage you'd need third-party tools
+(Cyberduck, Rclone, Mountain Duck) and a lot of patience.
+
+**Comparison for personal cloud storage at 2 TB:**
+
+| Service | Monthly | Built-in UI | Mobile apps | Sharing |
+|---|---|---|---|---|
+| Google One 2TB | $9.99 | yes | yes | yes |
+| iCloud+ 2TB | $9.99 | yes | yes | yes |
+| Backblaze B2 2TB | $12 | basic | no | basic |
+| **R2 2TB** | **$30** | minimal dashboard | no | API-only |
+
+**Recommendation:** keep Google Drive for personal photo/video storage.
+Use R2 only for app-side file storage (user uploads in SOP, Fleet, Asset,
+Meal). Don't try to consolidate; the use cases are different.
+
+### When you want video specifically: Cloudflare Stream
+
+R2 stores video bytes but doesn't stream them — playback would require
+downloading the whole file. If you ever want adaptive-bitrate streaming
+(HLS / DASH), automatic transcoding, thumbnails, and an embed player on a
+website, that's **Cloudflare Stream**:
+
+- **$5 per 1,000 minutes stored**
+- **$1 per 1,000 minutes delivered**
+
+That's much pricier than R2 raw storage, but Stream replaces a video CDN +
+encoder + player. Use it only when the use case is "embed video on a
+website with proper streaming" — never for personal video archive.
 
 ### How files connect to the database
 
@@ -214,8 +248,13 @@ sessions wire up the integrations once secrets are in place.
 
 ## 5. Decisions captured
 
-- **Email:** Postmark for everything. Don't run two providers.
-- **Storage / display:** R2 for raw user uploads (receipts, manuals, originals);
-  Cloudflare Images for any photo displayed on a website (apps and client sites).
-- **Client website migration:** plan to move all GitHub-hosted images to
-  Cloudflare Images, one site at a time, low priority but real technical debt.
+- **Email:** Postmark for everything (already paying $20/mo for 10k plan).
+  Resend not used.
+- **App user uploads (raw bytes):** R2.
+- **Photos displayed on websites (apps + client sites):** Cloudflare Images.
+- **Personal photo/video storage (Google Drive replacement):** **stay on
+  Google Drive.** R2 is the wrong tool for this.
+- **Video embedded on websites:** Cloudflare Stream (not R2). Defer until
+  there's a concrete use case.
+- **Client website migration off GitHub-hosted images:** plan to move
+  one site at a time, low priority but real technical debt.

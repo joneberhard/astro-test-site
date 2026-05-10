@@ -24,9 +24,22 @@ needs to clear the "I expect a real tool" threshold (~$9 minimum).
 | App | Free tier | Paid tier (monthly) | Paid tier (annual) | Audience |
 |---|---|---|---|---|
 | **SOP Checklist** | 1 user, up to 5 procedures | **$9/mo** per business | **$89/yr** (~$7.42/mo) | Small businesses (5–50 staff) |
-| **Fleet Maintenance** | 1 vehicle, last 30 days of logs | **$4.99/mo** | **$39/yr** (~$3.25/mo) | Households + DIYers + 2–4 vehicle small biz |
+| **Fleet Maintenance** | 1 vehicle, **unlimited log forever**, all features, affiliate links | tiered by vehicle count — see below | annual ~17% discount | Households + DIYers + small biz |
 | **Asset Tracker** | 25 items | **$2.99/mo** | **$24/yr** (=$2/mo) | Homeowners, tradespeople, multi-business owners |
-| **Meal Planning** | 5 saved recipes, no plan generator | **$3.99/mo** | **$29/yr** (~$2.42/mo) | High-protein, animal-based, IF/Warrior diet niches |
+| **Meal Planning** | unlimited recipes + planner, affiliate links, 1 user, 1 dietary profile | **$3.99/mo** | **$29/yr** (~$2.42/mo) | High-protein, animal-based, IF/Warrior diet niches |
+
+### Fleet tier ladder (vehicle count + role-based access)
+
+| Tier | Price | Vehicles | Notes |
+|---|---|---|---|
+| **Free** | $0 | 1 | Unlimited maintenance log, all features, affiliate links |
+| **Household** | **$4.99/mo** ($39/yr) | up to 4 | Same features, more vehicles |
+| **Small Business** | **$14.99/mo** ($129/yr) | up to 10 | + multi-user roles, parts inventory, priority email |
+| **Fleet Pro** | **$29/mo** ($249/yr) | up to 25 | + reports, CSV export, API access |
+| **Custom** | contact sales | 25+ | rare, but worth having for credibility |
+
+**Hard rule:** **the maintenance log is unlimited forever on every tier.** The
+log is the core value of the app — capping it would gut the product.
 
 ### Annual discount strategy
 
@@ -62,20 +75,30 @@ once they're using it daily.
 - 200 existing @ $9 + 300 new @ $19 = $1,800 + $5,700 = $7,500 MRR
 - 200 existing @ $9 + 500 new @ $19 = $1,800 + $9,500 = $11,300 MRR
 
-### Fleet — $4.99/mo, $39/yr
+### Fleet — tiered by vehicle count (Household $4.99 / SMB $14.99 / Pro $29)
 
-**Why this number:**
-- The classic consumer-prosumer SaaS sweet spot.
-- Affiliate revenue stacks on top — every "you need a new oil filter"
-  recommendation is a click that may convert.
-- Direct competitors (Fleetio, Simply Fleet) start at ~$3–4/vehicle/month
-  but charge per vehicle. Our flat $4.99 for 1–4 vehicles is competitive
-  for the household segment.
-- A small-business tier ($14.99/mo, up to 10 vehicles) added later if demand.
+**Why this structure:**
+- The maintenance log is the product. Capping it (by time or entries) makes
+  the app useless. So the gate has to be vehicle count, not log depth.
+- One free vehicle gets every feature. Affiliate revenue from that free user
+  funds their hosting + nets profit.
+- Each tier has a clear "I outgrew the last one" trigger:
+  - bought a second vehicle? → $4.99
+  - hired a tech who needs their own login? → $14.99
+  - have 11+ vehicles? → $29
+- Fleetio and Simply Fleet charge per vehicle; our flat tiers are easier to
+  understand and friendlier for the 2-vehicle household.
 
-**MRR math at $4.99:**
-- 200 customers = $998 MRR (plus affiliate ~$200–500)
-- 500 customers = $2,495 MRR (plus affiliate)
+**MRR math (mixed):**
+- 200 free + 100 Household ($499) + 30 SMB ($450) + 5 Pro ($145) = $1,094 MRR
+  + affiliate ~$300–800 = **$1,400–1,900 MRR**
+- 1,000 free + 400 Household ($1,996) + 80 SMB ($1,199) + 15 Pro ($435) =
+  $3,630 + affiliate $1,500–3,000 = **$5,000–6,600 MRR**
+
+**The free tier is intentionally generous.** We monetize via:
+1. Vehicle-count upgrades (subscription)
+2. Affiliate clicks from every user (free + paid)
+3. Eventual upsell to SOP / Asset / Meal across the ecosystem
 
 ### Asset Tracker — $2.99/mo, $24/yr
 
@@ -94,17 +117,59 @@ once they're using it daily.
 
 ### Meal — $3.99/mo, $29/yr
 
-**Why this number:**
-- Right beneath Paprika ($5/mo) and AnyList ($12/yr — but that's their *only*
-  tier).
-- Niching to specialized diets (high-protein animal-based, IF/Warrior)
-  justifies a premium over generic recipe apps. Don't go below $3.99.
-- Influencer distribution in those niches: the audience already pays for
-  niche content (carnivore protocols, paid newsletters, etc.).
+**Free tier (no caps on the basics):**
+- Unlimited recipes (no "5 saved" cap — that would torpedo signups)
+- Manual meal planning + basic grocery list
+- 1 user, 1 dietary profile
+- Affiliate links throughout (ingredients, kitchen gear)
+
+**Premium $3.99/mo unlocks automation, not access:**
+- **AI meal-plan generator** — set goals (calories, macros, foods to avoid),
+  get a full week of meals
+- **Recipe import from any URL** — paste, auto-extract ingredients/steps
+- **Macro tracking + analysis** — auto per recipe and per day
+- **Multiple dietary profiles** — track different family members'
+  diets simultaneously
+- **Multi-user household** — shared plans + grocery lists
+- **Grocery delivery integration** — 1-click cart pre-fill (Instacart, Walmart)
+- **PDF / print export** of meal plans
+- **AI ingredient swaps** ("replace canola with tallow throughout")
+
+**Pitch:** *"Free is a recipe + planner notebook. Premium is your AI meal-prep
+coach that does the thinking for you."*
+
+**Why this structure:**
+- Restricting recipe count is the wrong gate — recipe collections are the
+  baseline expectation, not a premium feature.
+- Time-saving automation is a real upgrade trigger because users feel the
+  pain weekly (planning, shopping list building, macro math).
+- Niching aggressively to specialized diets (high-protein animal-based,
+  IF/Warrior) justifies premium pricing among those audiences.
 
 **MRR math at $3.99:**
-- 300 paid = $1,197 MRR
-- 800 paid = $3,192 MRR
+- 5,000 free + 300 paid = $1,197 MRR + affiliate ~$300–800
+- 20,000 free + 1,000 paid = $3,990 MRR + affiliate ~$1,500–3,000
+
+### Additional revenue streams to consider for Meal (deferred)
+
+The founder explicitly flagged interest in additional upcharges that aren't
+"restrict recipes." Candidates worth piloting after launch:
+
+1. **One-off curated packs** — "30-Day Carnivore Reset" ($19),
+   "Warrior Diet Starter" ($9). Pre-built meal plan + grocery list. Sells
+   well to influencer audiences who consume bundled content.
+2. **Coach Connect tier** ($9.99/mo on top of Premium) — nutritionist Q&A.
+   High-touch, low-scale, high-margin. Defer unless a coach partner emerges.
+3. **Sponsored content** — paid sponsorships from animal-based food brands
+   (Force of Nature, US Wellness Meats, Belcampo). Affiliate codes built in.
+4. **Influencer partner program** — creators publish their own meal plans on
+   the platform; revenue split (e.g. 70/30 to creator). Built-in distribution.
+5. **White-label for fitness coaches / nutritionists** — $49/mo, coach gets
+   a branded portal where they assign meal plans to clients. Different
+   product, but same backend.
+
+These all stack on the $3.99 base subscription. None of them get built until
+the core app has paying customers.
 
 ---
 
@@ -168,19 +233,29 @@ Every app gets a free tier for these reasons:
 
 But the free tier must have **a clear ceiling that real users hit**:
 
-| App | Free ceiling | Why this trips paid conversion |
+| App | Free ceiling | What trips paid conversion |
 |---|---|---|
 | SOP | 5 procedures, 1 user | 5 is too few for a real business; multi-user is the killer feature |
-| Fleet | 1 vehicle, 30 days log history | Most users have 2+ vehicles; history is what they came for |
-| Asset | 25 items | Median home has 50–150 high-value items |
-| Meal | 5 recipes, no plan generator | Meal planning is the value; recipe library alone is a notebook |
+| Fleet | 1 vehicle (full features, full log, affiliate links) | Buying / leasing a 2nd vehicle |
+| Asset | 25 items (full features, affiliate links) | Median home has 50–150 high-value items |
+| Meal | unlimited recipes + planner, 1 user, 1 dietary profile, no AI | Wanting AI meal generation, recipe URL import, multi-user household, macro tracking |
+
+**Affiliate links are visible on every tier of every app, free or paid.**
+Restricting affiliate links would only hurt our own click-through revenue.
 
 ---
 
 ## Decisions captured
 
-- Launch pricing committed: **SOP $9, Fleet $4.99, Asset $2.99, Meal $3.99**.
-- All apps offer monthly + annual, with annual ~17–33% discount.
-- All apps have a free tier with a clear ceiling.
-- SOP earmarked for a $9 → $19 raise after testimonials.
+- **SOP:** $9/mo per business, raise to $19 after 3 testimonials.
+- **Fleet:** vehicle-count tiers (free 1 / $4.99 for 4 / $14.99 for 10 /
+  $29 for 25). **Maintenance log is unlimited forever on every tier.**
+- **Asset:** $2.99/mo for unlimited items above the 25-item free cap.
+- **Meal:** $3.99/mo unlocks AI / multi-user / import — **NOT** a recipe
+  count limit. Free tier has unlimited recipes.
+- **Affiliate links visible on every tier of every app.** They are revenue,
+  not a feature to gate.
+- All apps offer monthly + annual with annual ~17–33% discount.
 - Bundle pricing deferred until at least one app has 100 paying customers.
+- Meal additional revenue ideas (packs, coach connect, sponsored content,
+  influencer revenue split, white-label) deferred to post-launch.
