@@ -60,6 +60,24 @@ const isActive = (href: string) => pathname === href || (href !== "/" && pathnam
 				transition: background 0.15s, border-color 0.15s;
 			}
 			a.cta:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+			.grok-test {
+				display: inline-block;
+				font-size: 0.75rem;
+				font-weight: 700;
+				letter-spacing: 0.04em;
+				text-transform: uppercase;
+				color: #000;
+				background: var(--accent);
+				padding: 0.25rem 0.55rem;
+				border-radius: 4px;
+				margin: 0 0 1rem;
+			}
+			.grok-note {
+				margin-top: 1.5rem;
+				padding: 0.85rem 1rem;
+				border-left: 3px solid var(--accent);
+				background: color-mix(in srgb, var(--accent) 12%, transparent);
+			}
 			.phase {
 				display: flex;
 				gap: 1.25rem;
@@ -114,7 +132,7 @@ const isActive = (href: string) => pathname === href || (href !== "/" && pathnam
 			<slot />
 		</main>
 		<footer>
-			Ghost Zero Marketing · built with Astro · deployed on Cloudflare
+			Ghost Zero Marketing · built with Astro · deployed on Cloudflare · last test edit by Grok Build
 		</footer>
 	</body>
 </html>
